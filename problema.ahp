@@ -1,0 +1,183 @@
+Version: 2.0
+Alternatives: &alternatives
+  Colonia:
+  Florencia:
+  Estrasburgo:
+  Edimburgo:
+Goal:
+  name: Elegir el mejor destino
+  preferences:
+   pairwise:
+      - [Vuelos, Alojamiento, 2]
+      - [Vuelos, Fecha, 7]
+      - [Vuelos, Tiempo, 9]
+      - [Vuelos, Comida, 8]
+      - [Vuelos, Navidad, 7]
+      - [Alojamiento, Fecha, 7]
+      - [Alojamiento, Tiempo, 9]
+      - [Alojamiento, Comida, 7]
+      - [Alojamiento, Navidad, 6]
+      - [Fecha, Tiempo, 1/3]
+      - [Fecha, Comida, 1/4]
+      - [Fecha, Navidad, 3]
+      - [Tiempo, Comida, 1/5]
+      - [Tiempo, Navidad, 1/2]
+      - [Comida, Navidad, 6]
+  children:
+    Vuelos:
+      preferences:
+        pairwise:
+          - [HoraLlegada, HoraVuelta, 1/3]
+          - [HoraLlegada, PrecioVuelo, 1/9]
+          - [HoraVuelta, PrecioVuelo, 1/9]
+      children:
+        HoraLlegada:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.38]
+              - [Colonia, Estrasburgo, 2.13]
+              - [Colonia, Edimburgo, 1.34]
+              - [Florencia, Estrasburgo, 1.55]
+              - [Florencia, Edimburgo, 1.09]
+              - [Estrasburgo, Edimburgo, 0.75]
+          children: *alternatives
+        HoraVuelta:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.95]
+              - [Colonia, Estrasburgo, 1.01]
+              - [Colonia, Edimburgo, 2.67]
+              - [Florencia, Estrasburgo, 0.53]
+              - [Florencia, Edimburgo, 1.37]
+              - [Estrasburgo, Edimburgo, 2.6]
+          children: *alternatives
+        PrecioVuelo:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.05]
+              - [Colonia, Estrasburgo, 1.12]
+              - [Colonia, Edimburgo, 1.55]
+              - [Florencia, Estrasburgo, 1.07]
+              - [Florencia, Edimburgo, 1.48]
+              - [Estrasburgo, Edimburgo, 1.38]
+          children: *alternatives
+    Alojamiento:
+      preferences:
+        pairwise:
+          - [PrecioAlojamiento, Tipo, 8]
+          - [PrecioAlojamiento, Ubicacion, 7]
+          - [PrecioAlojamiento, Puntuacion, 6]
+          - [Tipo, Ubicacion, 1/8]
+          - [Tipo, Puntuacion, 1/3]
+          - [Ubicacion, Puntuacion, 7]
+      children:
+        PrecioAlojamiento:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.28]
+              - [Colonia, Estrasburgo, 1.95]
+              - [Colonia, Edimburgo, 2.13]
+              - [Florencia, Estrasburgo, 1.51]
+              - [Florencia, Edimburgo, 1.66]
+              - [Estrasburgo, Edimburgo, 1.09]
+          children: *alternatives
+        Tipo:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 2]
+              - [Colonia, Estrasburgo, 2]
+              - [Colonia, Edimburgo, 2]
+              - [Florencia, Estrasburgo, 1]
+              - [Florencia, Edimburgo, 1]
+              - [Estrasburgo, Edimburgo, 1]
+          children: *alternatives
+        Ubicacion:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 0.94]
+              - [Colonia, Estrasburgo, 0.26]
+              - [Colonia, Edimburgo, 1.37]
+              - [Florencia, Estrasburgo, 0.27]
+              - [Florencia, Edimburgo, 1.45]
+              - [Estrasburgo, Edimburgo, 5.33]
+          children: *alternatives
+        Puntuacion:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 0.92]
+              - [Colonia, Estrasburgo, 0.85]
+              - [Colonia, Edimburgo, 1.14]
+              - [Florencia, Estrasburgo, 0.86]
+              - [Florencia, Edimburgo, 1.24]
+              - [Estrasburgo, Edimburgo, 1.34]
+          children: *alternatives
+    Fecha:
+      preferences:
+        pairwise:
+          - [Horas, DiaMes, 8]
+      children:
+        Horas:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.12]
+              - [Colonia, Estrasburgo, 0.887]
+              - [Colonia, Edimburgo, 1.57]
+              - [Florencia, Estrasburgo, 0.791]
+              - [Florencia, Edimburgo, 1.4]
+              - [Estrasburgo, Edimburgo, 1.77]
+          children: *alternatives
+        DiaMes:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.5]
+              - [Colonia, Estrasburgo, 1]
+              - [Colonia, Edimburgo, 2.5]
+              - [Florencia, Estrasburgo, 0.67]
+              - [Florencia, Edimburgo, 1.67]
+              - [Estrasburgo, Edimburgo, 2.5]
+          children: *alternatives
+    Tiempo:
+      preferences:
+        pairwise:
+          - [Colonia, Florencia, 0.5]
+          - [Colonia, Estrasburgo, 2]
+          - [Colonia, Edimburgo, 1.33]
+          - [Florencia, Estrasburgo, 4]
+          - [Florencia, Edimburgo, 2.67]
+          - [Estrasburgo, Edimburgo, 0.67]
+      children: *alternatives
+    Comida:
+      preferences:
+        pairwise:
+          - [SinGluten, PrecioComida, 5]
+      children:
+        SinGluten:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 0.667]
+              - [Colonia, Estrasburgo, 8]
+              - [Colonia, Edimburgo, 0.889]
+              - [Florencia, Estrasburgo, 12]
+              - [Florencia, Edimburgo, 1.33]
+              - [Estrasburgo, Edimburgo, 0.11]
+          children: *alternatives
+        PrecioComida:
+          preferences:
+            pairwise:
+              - [Colonia, Florencia, 1.052]
+              - [Colonia, Estrasburgo, 0.885]
+              - [Colonia, Edimburgo, 1.197]
+              - [Florencia, Estrasburgo, 0.834]
+              - [Florencia, Edimburgo, 1.138]
+              - [Estrasburgo, Edimburgo, 1.4]
+          children: *alternatives
+    Navidad:
+      preferences:
+        pairwise:
+          - [Colonia, Florencia, 1.286]
+          - [Colonia, Estrasburgo, 0.9]
+          - [Colonia, Edimburgo, 1.125]
+          - [Florencia, Estrasburgo, 0.7]
+          - [Florencia, Edimburgo, 0.875]
+          - [Estrasburgo, Edimburgo, 1.25]
+      children: *alternatives
